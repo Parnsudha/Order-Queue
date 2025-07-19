@@ -4,7 +4,7 @@ import streamlit as st
 PASSWORD = "Parn"
 
 def login():
-    pwd = st.text_input("Enter password", type="password")
+    pwd = st.sidebar.text_input("Enter password", type="password")
     if pwd == PASSWORD:
         return True
     elif pwd != "":
@@ -135,3 +135,11 @@ if not filtered_df.empty:
         st.divider()
 else:
     st.info("No orders found for this filter.")
+# Convert to CSV and add to sidebar
+csv = df.to_csv(index=False).encode('utf-8')
+st.sidebar.download_button(
+    label="📥 Download Orders Backup",
+    data=csv,
+    file_name="orders_backup.csv",
+    mime="text/csv"
+)
