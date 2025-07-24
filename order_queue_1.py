@@ -3,16 +3,16 @@ import streamlit as st
 
 PASSWORD = "Parn"
 
-def login():
-    pwd = st.sidebar.text_input("Enter password", type="password")
-    if pwd == PASSWORD:
-        return True
-    elif pwd != "":
-        st.error("Incorrect password")
-    return False
-
-if not login():
-    st.stop()  # Stop the app here if not logged in
+#def login():
+#    pwd = st.sidebar.text_input("Enter password", type="password")
+#    if pwd == PASSWORD:
+#        return True
+#    elif pwd != "":
+#        st.error("Incorrect password")
+#    return False
+#
+#if not login():
+#    st.stop()  # Stop the app here if not logged in
 import pandas as pd
 import os
 
