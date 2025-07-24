@@ -5,6 +5,27 @@ from streamlit_folium import st_folium
 import folium
 from datetime import datetime, time, date
 
+import json
+import streamlit as st
+from google.oauth2.service_account import Credentials
+
+# 🔐 Load credentials from Streamlit Cloud Secrets
+credentials_dict = st.secrets["gcp_service_account"]
+credentials = Credentials.from_service_account_info(credentials_dict)
+
+import gspread
+
+# Authorize gspread with credentials
+gc = gspread.authorize(credentials)
+
+# Open your Google Sheet (replace with your sheet ID or name)
+# If using sheet name:
+spreadsheet = gc.open("ParnSudha Orders")  # Must match exactly
+
+# Use the first worksheet (or change to specific one)
+sheet = spreadsheet.worksheet("orders")
+
+
 CSV_FILE = "orders.csv"
 st.write("📁 Writing to:", os.path.abspath(CSV_FILE))
 
@@ -14,7 +35,8 @@ if not os.path.exists(CSV_FILE):
         "Customer Name", "Quantity", "Delivery Date", "Delivery Time", "Delivered", "Zoho", "Memo",
         "Latitude", "Longitude"
     ])
-    df.to_csv(CSV_FILE, index=False)
+    sheet.clear()
+    sheet.update([df.columns.values.tolist()] + df.values.tolist())
 
 st.subheader("📥 Place Your Order")
 # --- Order Form ---
@@ -46,9 +68,13 @@ if submitted:
             "Latitude", "Longitude", "Delivered", "Zoho", "Memo"
         ])
 
-        df = pd.read_csv(CSV_FILE)
+
+        data = sheet.get_all_records()
+        df = pd.DataFrame(data)
+
         df = pd.concat([df, new_order], ignore_index=True)
-        df.to_csv(CSV_FILE, index=False)
+        sheet.clear()
+        sheet.update([df.columns.values.tolist()] + df.values.tolist())
 
 	# 🔁 Reset form inputs manually
 
