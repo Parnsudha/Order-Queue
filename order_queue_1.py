@@ -46,7 +46,7 @@ with st.form("order_form"):
 
     col3, col4 = st.columns(2)
     with col3:
-        delivery_date = st.date_input("Delivery Date", min_value=date.today())
+        delivery_date = st.date_input("Delivery Date", min_value=date.today()-1)
     with col4:
         delivery_time = st.time_input("Delivery Time", value=time(16, 0))
 
