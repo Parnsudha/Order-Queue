@@ -30,13 +30,6 @@ sheet = spreadsheet.worksheet("Orders")
 #st.write("📁 Writing to:", os.path.abspath(CSV_FILE))
 
 # Ensure CSV file exists
-if not os.path.exists(CSV_FILE):
-    df = pd.DataFrame(columns=[
-        "Customer Name", "Quantity", "Delivery Date", "Delivery Time", "Delivered", "Zoho", "Memo",
-        "Latitude", "Longitude"
-    ])
-    sheet.clear()
-    sheet.update([df.columns.values.tolist()] + df.values.tolist())
 
 st.subheader("📥 Place Your Order")
 # --- Order Form ---
