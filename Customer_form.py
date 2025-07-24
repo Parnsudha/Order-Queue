@@ -53,6 +53,7 @@ if submitted:
 	# 🔁 Reset form inputs manually
 
         st.success("✅ Thank you! Your order has been placed.")
+	st.write("📄 Latest data:", df.tail(3))
         
     else:
         st.error("❌ Please fill in your name and quantity.")
