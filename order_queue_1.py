@@ -20,7 +20,7 @@ CSV_FILE = "orders.csv"
 
 # Initialize CSV if not exists
 if not os.path.exists(CSV_FILE):
-    df_init = pd.DataFrame(columns=["Customer Name", "Quantity", "Delivery Date", "Delivery Time", "Delivered", "Zoho", "Memo"])
+    df_init = pd.DataFrame(columns=["Customer Name", "Quantity", "Delivery Date", "Delivery Time", "Delivered", "Zoho", "Memo", "Latitude", "Longitude"])
     df_init.to_csv(CSV_FILE, index=False)
 
 # Load orders
@@ -42,13 +42,13 @@ with st.form("order_form"):
     with col1:
         name = st.text_input("Customer Name")
     with col2:
-        qty = st.number_input("Qty", min_value=1)
+        qty = st.number_input("Qty", min_value=20, step=5)
 
     col3, col4 = st.columns(2)
     with col3:
-        delivery_date = st.date_input("Delivery Date")
+        delivery_date = st.date_input("Delivery Date", min_value=date.today()-1)
     with col4:
-        delivery_time = st.time_input("Delivery Time")
+        delivery_time = st.time_input("Delivery Time", value=time(16, 0))
 
     memo = st.text_input("Memo / Comment (optional)")
 
