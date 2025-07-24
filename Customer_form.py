@@ -14,10 +14,10 @@ if not os.path.exists(CSV_FILE):
         "Latitude", "Longitude"
     ])
     df.to_csv(CSV_FILE, index=False)
-st.write("Working directory:", os.getcwd())
+
 
 st.subheader("📥 Place Your Order")
-
+st.write("Working directory:", os.getcwd())
 # --- Order Form ---
 with st.form("customer_order_form"):
     name = st.text_input("Customer Name")
