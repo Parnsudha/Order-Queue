@@ -5,7 +5,7 @@ from streamlit_folium import st_folium
 import folium
 from datetime import datetime, time, date
 
-CSV_FILE = "orders.csv"
+CSV_FILE = "data/orders.csv"
 
 # Ensure CSV file exists
 if not os.path.exists(CSV_FILE):
