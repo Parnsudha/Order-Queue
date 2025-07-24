@@ -16,7 +16,7 @@ PASSWORD = "Parn"
 import pandas as pd
 import os
 from datetime import date, time  # Add this line
-CSV_FILE = "orders.csv"
+CSV_FILE = "data/orders.csv"
 
 # Initialize CSV if not exists
 if not os.path.exists(CSV_FILE):
