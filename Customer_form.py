@@ -6,6 +6,7 @@ import folium
 from datetime import datetime, time, date
 
 CSV_FILE = "orders.csv"
+st.write("📁 Writing to:", os.path.abspath(CSV_FILE))
 
 # Ensure CSV file exists
 if not os.path.exists(CSV_FILE):
