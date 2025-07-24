@@ -15,9 +15,7 @@ if not os.path.exists(CSV_FILE):
     ])
     df.to_csv(CSV_FILE, index=False)
 
-
 st.subheader("📥 Place Your Order")
-st.write("Working directory:", os.getcwd())
 # --- Order Form ---
 with st.form("customer_order_form"):
     name = st.text_input("Customer Name")
