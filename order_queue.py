@@ -16,7 +16,6 @@ PASSWORD = "Parn"
 import pandas as pd
 import os
 from datetime import date, time  # Add this line
-st.write("Saving to:", os.path.abspath(CSV_FILE))
 
 CSV_FILE = "orders.csv"
 
@@ -24,7 +23,7 @@ CSV_FILE = "orders.csv"
 if not os.path.exists(CSV_FILE):
     df_init = pd.DataFrame(columns=["Customer Name", "Quantity", "Delivery Date", "Delivery Time", "Delivered", "Zoho", "Memo", "Latitude", "Longitude"])
     df_init.to_csv(CSV_FILE, index=False)
-
+st.write("📁 Writing to:", os.path.abspath(CSV_FILE))
 # Load orders
 df = pd.read_csv(CSV_FILE)
 # Ensure all expected columns are present
