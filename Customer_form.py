@@ -23,11 +23,11 @@ gc = gspread.authorize(credentials)
 spreadsheet = gc.open("ParnSudha Orders")  # Must match exactly
 
 # Use the first worksheet (or change to specific one)
-sheet = spreadsheet.worksheet("orders")
+sheet = spreadsheet.worksheet("Orders")
 
 
-CSV_FILE = "orders.csv"
-st.write("📁 Writing to:", os.path.abspath(CSV_FILE))
+#CSV_FILE = "orders.csv"
+#st.write("📁 Writing to:", os.path.abspath(CSV_FILE))
 
 # Ensure CSV file exists
 if not os.path.exists(CSV_FILE):
