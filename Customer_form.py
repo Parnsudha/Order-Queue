@@ -5,7 +5,7 @@ from streamlit_folium import st_folium
 import folium
 from datetime import datetime, time, date
 
-CSV_FILE = "data/orders.csv"
+CSV_FILE = "orders.csv"
 
 # Ensure CSV file exists
 if not os.path.exists(CSV_FILE):
@@ -14,6 +14,7 @@ if not os.path.exists(CSV_FILE):
         "Latitude", "Longitude"
     ])
     df.to_csv(CSV_FILE, index=False)
+st.write("Working directory:", os.getcwd())
 
 st.subheader("📥 Place Your Order")
 
