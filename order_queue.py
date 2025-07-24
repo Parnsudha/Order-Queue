@@ -16,6 +16,8 @@ PASSWORD = "Parn"
 import pandas as pd
 import os
 from datetime import date, time  # Add this line
+st.write("Saving to:", os.path.abspath(CSV_FILE))
+
 CSV_FILE = "orders.csv"
 
 # Initialize CSV if not exists
