@@ -85,7 +85,7 @@ with st.form("order_form"):
 #    delivery_time = st.time_input("Delivery Time")
 #    submitted = st.form_submit_button("Add Order")
 
-    if submitted:
+if submitted:
     new_order = pd.DataFrame([[name, qty, delivery_date, delivery_time, "No", "No", memo]],
                              columns=["Customer Name", "Quantity", "Delivery Date", "Delivery Time", "Delivered", "Paid", "Memo"])
     df = pd.concat([df, new_order], ignore_index=True)
