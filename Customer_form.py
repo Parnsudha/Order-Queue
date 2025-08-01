@@ -40,7 +40,7 @@ with st.form("customer_order_form"):
     qty = st.number_input("Quantity", min_value=20, step=5)
     delivery_date = st.date_input("Preferred Delivery Date", min_value=date.today())
     delivery_time = st.time_input("Preferred Delivery Time", value=time(16, 0))
-    address = st.text_area("Delivery Address (optional)",Height=60)
+    address = st.text_area("Delivery Address (optional)", Height=60)
 
     with st.expander("### 📍 Click on the Map for Delivery Location", expanded=True):
 
