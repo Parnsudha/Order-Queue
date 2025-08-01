@@ -86,14 +86,14 @@ with st.form("order_form"):
 #    submitted = st.form_submit_button("Add Order")
 
     if submitted:
-        new_order = pd.DataFrame([[name, qty, delivery_date, delivery_time, "No", "No", memo]],
-                                 columns=["Customer Name", "Quantity", "Delivery Date", "Delivery Time", "Delivered", "Paid", "Memo"])
-        df = pd.concat([df, new_order], ignore_index=True)
-	values = [df.columns.values.tolist()] + df.astype(str).values.tolist()
-	sheet.update(values)
-        st.success("✅ Order Added")
-        st.rerun()
-
+    new_order = pd.DataFrame([[name, qty, delivery_date, delivery_time, "No", "No", memo]],
+                             columns=["Customer Name", "Quantity", "Delivery Date", "Delivery Time", "Delivered", "Paid", "Memo"])
+    df = pd.concat([df, new_order], ignore_index=True)
+    values = [df.columns.values.tolist()] + df.astype(str).values.tolist()
+    sheet.update(values)
+    st.success("✅ Order Added")
+    st.rerun()
+	
 # --- Status and Delete update functions ---
 def update_status(index, column):
     current = df.at[index, column]
