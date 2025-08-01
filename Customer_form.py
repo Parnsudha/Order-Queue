@@ -42,7 +42,7 @@ with st.form("customer_order_form"):
     delivery_time = st.time_input("Preferred Delivery Time", value=time(16, 0))
     address = st.text_area("Delivery Address (optional)")
 
-    with st.expander("### 📍 Click on the Map for Delivery Location", expanded=False):
+    with st.expander("### 📍 Click on the Map for Delivery Location", expanded=True):
 
     # Responsive, smaller height, less gap below map
         m = folium.Map(location=[26.9124, 75.7873], zoom_start=12, Height=260)
