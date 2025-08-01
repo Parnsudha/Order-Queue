@@ -42,12 +42,17 @@ with st.form("customer_order_form"):
     delivery_time = st.time_input("Preferred Delivery Time", value=time(16, 0))
     address = st.text_area("Delivery Address (optional)")
 
+with st.container():
     st.markdown("### 📍 Click on the Map for Delivery Location")
+
+    # Responsive, smaller height, less gap below map
     m = folium.Map(location=[26.9124, 75.7873], zoom_start=12)
     m.add_child(folium.LatLngPopup())
-    map_data = st_folium(m, width=360, height=300)
-    submitted = st.form_submit_button("Submit Order")
 
+    map_data = st_folium(m, height=200, use_container_width=True)
+
+    # Button close to map, minimal spacing
+    submitted = st.form_submit_button("🚀 Submit Order")
 
 # --- Save the Order ---
 if submitted:
