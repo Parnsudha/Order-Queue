@@ -89,7 +89,8 @@ with st.form("order_form"):
         new_order = pd.DataFrame([[name, qty, delivery_date, delivery_time, "No", "No", memo]],
                                  columns=["Customer Name", "Quantity", "Delivery Date", "Delivery Time", "Delivered", "Paid", "Memo"])
         df = pd.concat([df, new_order], ignore_index=True)
-        sheet.update([df.columns.values.tolist()] + df.values.tolist())
+	values = [df.columns.values.tolist()] + df.astype(str).values.tolist()
+	sheet.update(values)
         st.success("✅ Order Added")
         st.rerun()
 
@@ -97,7 +98,8 @@ with st.form("order_form"):
 def update_status(index, column):
     current = df.at[index, column]
     df.at[index, column] = "No" if current == "Yes" else "Yes"
-    sheet.update([df.columns.values.tolist()] + df.values.tolist())
+    values = [df.columns.values.tolist()] + df.astype(str).values.tolist()
+    sheet.update(values)
     st.rerun()
 
 def delete_order(index):
