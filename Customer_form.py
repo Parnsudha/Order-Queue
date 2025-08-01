@@ -56,7 +56,7 @@ if submitted:
         lon = map_data["last_clicked"]["lng"] if map_data.get("last_clicked") else ""
 
         new_order = pd.DataFrame([[
-            name, qty, delivery_date, delivery_time,
+            name, qty, str(delivery_date), str(delivery_time),
             lat, lon, "No", "No", address
         ]], columns=[
             "Customer Name", "Quantity", "Delivery Date", "Delivery Time",
