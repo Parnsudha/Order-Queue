@@ -45,7 +45,7 @@ with st.form("customer_order_form"):
     st.markdown("### 📍 Click on the Map for Delivery Location")
     m = folium.Map(location=[26.9124, 75.7873], zoom_start=12)
     m.add_child(folium.LatLngPopup())
-    map_data = st_folium(m, width=620, height=270)
+    map_data = st_folium(m, width=400, height=210)
     submitted = st.form_submit_button("Submit Order")
 
 
