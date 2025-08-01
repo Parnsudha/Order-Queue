@@ -40,12 +40,12 @@ with st.form("customer_order_form"):
     qty = st.number_input("Quantity", min_value=20, step=5)
     delivery_date = st.date_input("Preferred Delivery Date", min_value=date.today())
     delivery_time = st.time_input("Preferred Delivery Time", value=time(16, 0))
-    address = st.text_area("Delivery Address (optional)", Height=60)
+    address = st.text_area("Delivery Address (optional)", height=60)
 
     with st.expander("### 📍 Click on the Map for Delivery Location", expanded=True):
 
     # Responsive, smaller height, less gap below map
-        m = folium.Map(location=[26.9124, 75.7873], zoom_start=12, Height=340)
+        m = folium.Map(location=[26.9124, 75.7873], zoom_start=12, height=340)
         m.add_child(folium.LatLngPopup())
         map_data = st_folium(m, height=340, use_container_width=True)
 
