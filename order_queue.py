@@ -105,8 +105,13 @@ def update_status(index, column):
 def delete_order(index):
     global df
     df = df.drop(index).reset_index(drop=True)
+# Safely clear only the data from the sheet (but not the whole sheet to avoid losing headers)
+    sheet.resize(rows=1)  # Keep only the header row
+
+    # Now re-write headers and all updated data
+		
     values = [df.columns.values.tolist()] + df.astype(str).values.tolist()
-    sheet.update(values)
+    sheet.update("A1", values)
     st.success("✅ Order deleted")
     st.rerun()
 
