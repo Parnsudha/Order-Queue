@@ -11,7 +11,9 @@ from google.oauth2.service_account import Credentials
 
 # 🔐 Load credentials from Streamlit Cloud Secrets
 credentials_dict = st.secrets["gcp_service_account"]
-credentials = Credentials.from_service_account_info(credentials_dict)
+credentials = Credentials.from_service_account_info(credentials_dict,
+    scopes=["https://www.googleapis.com/auth/spreadsheets", "https://www.googleapis.com/auth/drive"]
+)
 
 import gspread
 
