@@ -45,10 +45,9 @@ with st.form("customer_order_form"):
     with st.expander("### 📍 Click on the Map for Delivery Location", expanded=True):
 
     # Responsive, smaller height, less gap below map
-        m = folium.Map(location=[26.9124, 75.7873], zoom_start=12, height=340)
+        m = folium.Map(location=[26.9124, 75.7873], zoom_start=12, height=300)
         m.add_child(folium.LatLngPopup())
-        map_data = st_folium(m, height=340, use_container_width=True)
-
+        map_data = st_folium(m, height=300, use_container_width=True)
     # Button close to map, minimal spacing
     submitted = st.form_submit_button("🚀 Submit Order")
 
