@@ -68,8 +68,8 @@ if submitted:
         df = pd.DataFrame(data)
 
         df = pd.concat([df, new_order], ignore_index=True)
-        sheet.clear()
-        sheet.update([df.columns.values.tolist()] + df.values.tolist())
+        values = [df.columns.values.tolist()] + df.astype(str).values.tolist()
+	sheet.update(values)
 
 	# 🔁 Reset form inputs manually
 
