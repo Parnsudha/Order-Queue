@@ -162,8 +162,9 @@ if not filtered_df.empty:
                 update_status(i, "Zoho")
 
         with col3:
-            if st.button("🗑️ Delete", key=f"delete_{i}"):
-                delete_order(i)
+            actual_index = row.name  # This gives the correct index from df
+            if st.button("🗑️ Delete", key=f"delete_{actual_index}"):
+                delete_order(actual_index)
 
         st.divider()
 else:
