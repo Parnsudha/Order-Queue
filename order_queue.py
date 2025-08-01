@@ -39,7 +39,7 @@ sheet = spreadsheet.worksheet("Orders")
 #if not os.path.exists(CSV_FILE):
 #    df_init = pd.DataFrame(columns=["Customer Name", "Quantity", "Delivery Date", "Delivery Time", "Delivered", "Zoho", "Memo", "Latitude", "Longitude"])
 #    df_init.to_csv(CSV_FILE, index=False)
-st.write("📁 Writing to:", os.path.abspath(CSV_FILE))
+#st.write("📁 Writing to:", os.path.abspath(CSV_FILE))
 # Load orders
 data = sheet.get_all_records()
 df = pd.DataFrame(data)
