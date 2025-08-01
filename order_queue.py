@@ -105,7 +105,9 @@ def update_status(index, column):
 def delete_order(index):
     global df
     df = df.drop(index).reset_index(drop=True)
-    sheet.update([df.columns.values.tolist()] + df.values.tolist())
+    values = [df.columns.values.tolist()] + df.astype(str).values.tolist()
+    sheet.update(values)
+    st.success("✅ Order deleted")
     st.rerun()
 
 # --- Filter Orders ---
