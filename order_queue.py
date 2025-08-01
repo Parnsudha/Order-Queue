@@ -17,15 +17,39 @@ import pandas as pd
 import os
 from datetime import date, time  # Add this line
 
-CSV_FILE = "orders.csv"
+from google.oauth2.service_account import Credentials
+import gspread
+
+# Load credentials and authorize
+credentials_dict = st.secrets["gcp_service_account"]
+scoped_credentials = Credentials.from_service_account_info(
+    credentials_dict,
+    scopes=[
+        "https://www.googleapis.com/auth/spreadsheets",
+        "https://www.googleapis.com/auth/drive",
+    ]
+)
+gc = gspread.authorize(scoped_credentials)
+
+# Connect to sheet
+spreadsheet = gc.open("ParnSudha Orders")
+sheet = spreadsheet.worksheet("Orders")
 
 # Initialize CSV if not exists
-if not os.path.exists(CSV_FILE):
-    df_init = pd.DataFrame(columns=["Customer Name", "Quantity", "Delivery Date", "Delivery Time", "Delivered", "Zoho", "Memo", "Latitude", "Longitude"])
-    df_init.to_csv(CSV_FILE, index=False)
+#if not os.path.exists(CSV_FILE):
+#    df_init = pd.DataFrame(columns=["Customer Name", "Quantity", "Delivery Date", "Delivery Time", "Delivered", "Zoho", "Memo", "Latitude", "Longitude"])
+#    df_init.to_csv(CSV_FILE, index=False)
 st.write("📁 Writing to:", os.path.abspath(CSV_FILE))
 # Load orders
-df = pd.read_csv(CSV_FILE)
+data = sheet.get_all_records()
+df = pd.DataFrame(data)
+
+# Add missing columns if needed
+required_columns = ["Customer Name", "Quantity", "Delivery Date", "Delivery Time", "Delivered", "Zoho", "Memo", "Latitude", "Longitude"]
+for col in required_columns:
+    if col not in df.columns:
+        df[col] = ""
+
 # Ensure all expected columns are present
 required_columns = ["Customer Name", "Quantity", "Delivery Date", "Delivery Time", "Delivered", "Paid", "Memo"]
 for col in required_columns:
@@ -65,7 +89,7 @@ with st.form("order_form"):
         new_order = pd.DataFrame([[name, qty, delivery_date, delivery_time, "No", "No", memo]],
                                  columns=["Customer Name", "Quantity", "Delivery Date", "Delivery Time", "Delivered", "Paid", "Memo"])
         df = pd.concat([df, new_order], ignore_index=True)
-        df.to_csv(CSV_FILE, index=False)
+        sheet.update([df.columns.values.tolist()] + df.values.tolist())
         st.success("✅ Order Added")
         st.rerun()
 
@@ -73,13 +97,13 @@ with st.form("order_form"):
 def update_status(index, column):
     current = df.at[index, column]
     df.at[index, column] = "No" if current == "Yes" else "Yes"
-    df.to_csv(CSV_FILE, index=False)
+    sheet.update([df.columns.values.tolist()] + df.values.tolist())
     st.rerun()
 
 def delete_order(index):
     global df
     df = df.drop(index).reset_index(drop=True)
-    df.to_csv(CSV_FILE, index=False)
+    sheet.update([df.columns.values.tolist()] + df.values.tolist())
     st.rerun()
 
 # --- Filter Orders ---
